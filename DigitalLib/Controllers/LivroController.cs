@@ -36,6 +36,16 @@ namespace DigitalLib.Controllers
                 ViewData["AutorId"] = new SelectList(_context.Autor, "Id", "Nome", null);
                 return View(livro);
             }
+
+            DateTime? date = DateTime.Now;
+
+            if (livro.DataPublicacao > date)
+            {
+                ModelState.AddModelError("DataPublicacao", "A data precisa ser válida.");
+                ViewData["AutorId"] = new SelectList(_context.Autor, "Id", "Nome", null);
+                return View(livro);
+            }
+
             if (livro == null)
             {
                 return NotFound();

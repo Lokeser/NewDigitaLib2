@@ -4,6 +4,7 @@ using DigitalLib.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DigitalLib.Controllers
 {
@@ -36,6 +37,16 @@ namespace DigitalLib.Controllers
                 ViewData["Generos"] = new List<string> { "Masculino", "Feminino", "Prefiro não dizer" };
                 return View(autor);
             }
+
+            DateTime? date = DateTime.Now;
+
+            if (autor.DataNascimento > date)
+            {
+                ModelState.AddModelError("DataNascimento", "A data precisa ser válida.");
+                ViewData["Generos"] = new List<string> { "Masculino", "Feminino", "Prefiro não dizer" };
+                return View(autor);
+            }
+
             if (autor == null)
             {
                 return NotFound();

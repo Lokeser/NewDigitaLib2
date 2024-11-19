@@ -40,6 +40,16 @@ namespace DigitalLib.Controllers
                 return View(aluguel);
             }
 
+            DateTime? date = DateTime.Now;
+
+            if (aluguel.DataEmprestimo > date)
+            {
+                ModelState.AddModelError("DataEmprestimo", "A data precisa ser válida.");
+                ViewBag.Livros = _context.Livro.Select(d => new { d.Id, d.Titulo }).ToList();
+                ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", aluguel.ClienteId);
+                return View(aluguel);
+            }
+
             if (aluguel.DataDevolucao < aluguel.DataEmprestimo)
             {
                 ModelState.AddModelError("DataDevolucao", "A data de devolução não pode ser antes da data de empréstimo.");
