@@ -48,6 +48,7 @@ namespace DigitalLib.Controllers
                 return View(aluguel);
             }
 
+
             if (aluguel.LivrosSelecionados == null || !aluguel.LivrosSelecionados.Any())
             {
                 ModelState.AddModelError("LivrosSelecionados", "Selecione pelo menos um livro.");
