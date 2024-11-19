@@ -121,6 +121,7 @@ namespace DigitalLib.Controllers
             }
             if (aluguel.DataDevolucao < aluguel.DataEmprestimo)
             {
+                ModelState.AddModelError("DataDevolucao", "A data de devolução não pode ser antes da data de empréstimo.");
                 ViewData["LivroId"] = new SelectList(_context.Livro, "Id", "Titulo", null);
                 ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", null);
                 return View(aluguel);
