@@ -13,11 +13,25 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="LivroId" class="control-label">Título do livro</label>
-                <select asp-for="LivroId" class="form-control" asp-items="ViewBag.LivroId">
-                    <option>Selecione o livro</option>
-                </select>
+            <div>
+                <label>Livros</label>
+                <div>
+                    @if ((IEnumerable<dynamic>)ViewBag.Livros != null)
+                    {
+                        @foreach (var livro in (IEnumerable<dynamic>)ViewBag.Livros)
+                        {
+                            <div>
+                                <input type="checkbox" name="LivrosSelecionados" value="@livro.Id" />
+                                <label>@livro.Titulo</label>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>Não possuímos livros cadastrados.</p>
+                    }
+
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="ClienteId" class="control-label">Nome do cliente</label>

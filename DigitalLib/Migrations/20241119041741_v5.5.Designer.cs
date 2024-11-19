@@ -4,6 +4,7 @@ using DigitalLib.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalLib.Migrations
 {
     [DbContext(typeof(BibliotecaDigitalContext))]
-    partial class BibliotecaDigitalContextModelSnapshot : ModelSnapshot
+    [Migration("20241119041741_v5.5")]
+    partial class v55
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +44,6 @@ namespace DigitalLib.Migrations
 
                     b.Property<int>("LivroId")
                         .HasColumnType("int");
-
-                    b.PrimitiveCollection<string>("LivrosSelecionados")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

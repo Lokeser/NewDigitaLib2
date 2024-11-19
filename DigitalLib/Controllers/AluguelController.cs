@@ -23,38 +23,57 @@ namespace DigitalLib.Controllers
         }
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome");
-            ViewData["LivroId"] = new SelectList(_context.Livro, "Id", "Titulo");
-            return View(); 
+            var livros = _context.Livro.Select(d => new { d.Id, d.Titulo }).ToList();
+            ViewBag.Livros = livros;
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", null);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("DataEmprestimo", "DataDevolucao", "LivroId", "ClienteId")] Aluguel aluguel)
+        public IActionResult Create([Bind("DataEmprestimo", "DataDevolucao", "ClienteId", "LivrosSelecionados")] Aluguel aluguel)
         {
             if (!ModelState.IsValid)
             {
-                ViewData["LivroId"] = new SelectList(_context.Livro, "Id", "Titulo", null);
-                ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", null);
+                ViewBag.Livros = _context.Livro.Select(d => new { d.Id, d.Titulo }).ToList();
+                ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", aluguel.ClienteId);
                 return View(aluguel);
-            }
-            if (aluguel == null)
-            {
-                return NotFound();
             }
 
             if (aluguel.DataDevolucao < aluguel.DataEmprestimo)
             {
                 ModelState.AddModelError("DataDevolucao", "A data de devolução não pode ser antes da data de empréstimo.");
-                ViewData["LivroId"] = new SelectList(_context.Livro, "Id", "Titulo", null);
-                ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", null);
+                ViewBag.Livros = _context.Livro.Select(d => new { d.Id, d.Titulo }).ToList();
+                ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", aluguel.ClienteId);
                 return View(aluguel);
             }
 
-            _context.Add(aluguel);
+            if (aluguel.LivrosSelecionados == null || !aluguel.LivrosSelecionados.Any())
+            {
+                ModelState.AddModelError("LivrosSelecionados", "Selecione pelo menos um livro.");
+                var livros = _context.Livro.Select(d => new { d.Id, d.Titulo }).ToList();
+                ViewBag.Livros = livros;
+                ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", null);
+                return View();
+            }
+
+            foreach (var livroId in aluguel.LivrosSelecionados)
+            {
+                var aluguelLivro = new Aluguel
+                {
+                    DataEmprestimo = aluguel.DataEmprestimo,
+                    DataDevolucao = aluguel.DataDevolucao,
+                    ClienteId = aluguel.ClienteId,
+                    LivroId = livroId
+                };
+
+                _context.Add(aluguelLivro);
+            }
+
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
 
         public IActionResult Edit(int? id)
