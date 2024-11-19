@@ -125,6 +125,17 @@ namespace DigitalLib.Controllers
                 ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", null);
                 return View(aluguel);
             }
+
+            DateTime? date = DateTime.Now;
+
+            if (aluguel.DataEmprestimo > date)
+            {
+                ModelState.AddModelError("DataEmprestimo", "A data precisa ser válida.");
+                ViewData["LivroId"] = new SelectList(_context.Livro, "Id", "Titulo", null);
+                ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", null);
+                return View(aluguel);
+            }
+
             try
             {
                 _context.Update(aluguel);

@@ -87,6 +87,15 @@ namespace DigitalLib.Controllers
                 return View(autor);
             }
 
+            DateTime? date = DateTime.Now;
+
+            if (autor.DataNascimento > date)
+            {
+                ModelState.AddModelError("DataNascimento", "A data precisa ser válida.");
+                ViewData["Generos"] = new List<string> { "Masculino", "Feminino", "Prefiro não dizer" };
+                return View(autor);
+            }
+
             try
             {
                 _context.Update(autor);
