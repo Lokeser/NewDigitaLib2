@@ -4,64 +4,147 @@
 }
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"]</title>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/DigitalLib.styles.css" asp-append-version="true" />
-    </head>
-    <body>
-        <div class="container my-5">
-            <h1 class="display-4 text-center">Bem-vindo à Biblioteca Digital!</h1>
-            <p class="lead text-center">Explore, gerencie e descubra nosso acervo de maneira simples e prática.</p>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f5f5dc; /* Fundo bege */
+            font-family: 'Times New Roman', serif;
+        }
 
-            <div class="row mt-4">
-                <!-- Seção Autores -->
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Autores</h5>
-                            <p class="card-text">Explore e gerencie informações sobre os autores do nosso acervo.</p>
-                            <a class="btn btn-primary" asp-controller="Autor" asp-action="Index">Ver Autores</a>
-                        </div>
-                    </div>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 50px;
+        }
+
+        .card {
+            width: 250px;
+            border: none;
+            border-radius: 15px;
+            background-color: #757575; /* Fundo cinza */
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .card img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+
+        .card-title {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .card-text {
+            text-align: center;
+            font-size: 0.9rem;
+            margin: 10px 15px;
+        }
+
+        .btn-custom {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 8px 0;
+            font-weight: bold;
+            background-color: #c8ad7f; /* Dourado */
+            color: black;
+            border-radius: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            .btn-custom:hover {
+                background-color: #b59159;
+                color: white;
+            }
+
+        .main-heading {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .sub-heading {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="main-heading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-book-half" viewBox="0 0 16 16">
+                <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+            </svg>
+            Biblioteca Digital
+            </h1>
+        <p class="sub-heading">Transformando conhecimento em tecnologia.</p>
+    </header>
+
+    <main class="container">
+        <div class="card-container">
+            <!-- Cartão de Autores -->
+            <div class="card">
+                <img src="~/autor.png" alt="Autores">
+                <div class="card-body">
+                    <h5 class="card-title">Autores</h5>
+                    <p class="card-text">Explore e gerencie informações sobre os autores do nosso acervo.</p>
+                    <a class="btn btn-custom" asp-controller="Autor" asp-action="Index">Ir para Autores</a>
                 </div>
-
-                <!-- Seção Livros -->
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Livros</h5>
-                            <p class="card-text">Conheça o nosso acervo e gerencie detalhes de cada obra.</p>
-                            <a class="btn btn-primary" asp-controller="Livro" asp-action="Index">Ver Livros</a>
-                        </div>
-                    </div>
+            </div>
+            <!-- Cartão de Clientes -->
+            <div class="card">
+                <img src="~/leitor.png" alt="Clientes">
+                <div class="card-body">
+                    <h5 class="card-title">Clientes</h5>
+                    <p class="card-text">Gerencie o cadastro de clientes e acompanhe seu histórico de algueis.</p>
+                    <a class="btn btn-custom" asp-controller="Cliente" asp-action="Index">Ir para Clientes</a>
                 </div>
+            </div>
 
-                <!-- Seção Clientes -->
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Clientes</h5>
-                            <p class="card-text">Gerencie o cadastro de clientes e acompanhe seu histórico de leitura.</p>
-                            <a class="btn btn-primary" asp-controller="Cliente" asp-action="Index">Ver Clientes</a>
-                        </div>
-                    </div>
+            <!-- Cartão de Livros -->
+            <div class="card">
+                <img src="~/livro.png" alt="Livros">
+                <div class="card-body">
+                    <h5 class="card-title">Livros</h5>
+                    <p class="card-text">Conheça o nosso acervo, registre livros e gerencie detalhes de cada obra.</p>
+                    <a class="btn btn-custom" asp-controller="Livro" asp-action="Index">Ir para Alugéis</a>
                 </div>
+            </div>
 
-                <!-- Seção Aluguéis -->
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Aluguel de Livros</h5>
-                            <p class="card-text">Controle o empréstimo e devolução de livros de forma eficiente.</p>
-                            <a class="btn btn-primary" asp-controller="Aluguel" asp-action="Index">Ver Aluguéis</a>
-                        </div>
-                    </div>
+            <!-- Cartão de Aluguéis -->
+            <div class="card">
+                <img src="~/alugar.png" alt="Aluguéis">
+                <div class="card-body">
+                    <h5 class="card-title">Aluguel de Livros</h5>
+                    <p class="card-text">Controle o empréstimo e devolução de livros de forma eficiente.</p>
+                    <a class="btn btn-custom" asp-controller="Aluguel" asp-action="Index">Ir para Aluguéis</a>
                 </div>
             </div>
         </div>
-    </body>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

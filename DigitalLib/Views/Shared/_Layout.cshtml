@@ -7,35 +7,79 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DigitalLib.styles.css" asp-append-version="true" />
+
+    <!-- Estilos personalizados -->
+    <style>
+        /* Mudança da fonte para Times New Roman em toda a página */
+        body {
+            font-family: "Times New Roman", Times, serif; /* Define a fonte como Times New Roman */
+            background-color: #f5f5dc; /* Creme claro */
+        }
+        .white {
+            color:white; !important
+        }
+        /* Modificação da borda superior para marrom claro */
+        header {
+            border-top: 5px solid #c8ad7f; /* Marrom claro */
+        }
+
+        /* Alterando a navbar para marrom claro */
+        .navbar {
+            background-color: #c8ad7f; /* Marrom claro */
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: #fff; /* Cor branca para links para contraste */
+        }
+
+            .navbar-light .navbar-nav .nav-link:hover {
+                color: #d8c5a5; /* Cor para os links ao passar o mouse (um tom mais claro de marrom) */
+            }
+
+        /* Estilo do footer com fundo mais escuro para contraste */
+        footer {
+            background-color: #d8c5a5; /* Marrom mais claro que o header */
+        }
+
+            footer a {
+                color: #5f4b3e; /* Cor para o link no rodapé */
+            }
+
+                footer a:hover {
+                    color: #c8ad7f; /* Cor para o link no rodapé quando passa o mouse */
+                }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Biblioteca Digital</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:#c8ad7f;">
+            <div class="container-fluid" style="background-color:#c8ad7f;">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-half" viewBox="0 0 16 16">
+                        <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+                    </svg>
+                    Biblioteca Digital
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="background-color:#c8ad7f;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Autor" asp-action="Index">Autores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Autor" asp-action="Index">Autores</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Livro" asp-action="Index">Livros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Livro" asp-action="Index">Livros</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Aluguel" asp-action="Index">Alugueis</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Aluguel" asp-action="Index">Alugueis</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Sobre nós</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Sobre nós</a>
                         </li>
                     </ul>
                 </div>
